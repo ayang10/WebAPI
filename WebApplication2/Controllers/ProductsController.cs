@@ -16,14 +16,17 @@ namespace WebApplication2.Controllers
             new Product() {Id = 1, ProductName = "Banana", Price = 40 },
             new Product() {Id = 2, ProductName = "Orange", Price = 60 }
         };
-        // GET: api/Products
-        public IHttpActionResult Get()
+        // GET: api/Products   //can you [HttpGet] if classname doesn't start with Get, for example use [HttpGet] if classname is "LoadProducts()"
+        // Custom method name
+        [HttpGet]
+        public IHttpActionResult LoadProducts()
         {
             return Ok(products);
         }
 
         // GET: api/Products/5
-        public Product Get(int id)
+        [HttpGet]
+        public Product GetSpecificProduct(int id)
         {
             return products[id];
         }
@@ -36,7 +39,7 @@ namespace WebApplication2.Controllers
         }
 
         // PUT: api/Products/5
-        public void Put(int id, [FromBody]Product product)
+        public void Put([FromBody]int id, [FromUri]Product product)
         {
             products[id] = product;
         }
